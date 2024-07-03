@@ -10,5 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all the content of the app folder to the working directory in the container
 COPY . .
 
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
 # Command to run the Flask application
 CMD ["flask", "run", "--host=0.0.0.0"]

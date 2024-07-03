@@ -6,13 +6,15 @@ WORKDIR /client
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-RUN npm cache clean --force
+# RUN npm cache clean --force
 
 # Install the dependencies
 RUN npm install
 
 # Copy all the content of the client folder to the working directory in the container
 COPY . .
+
+EXPOSE 3001
 
 # Command to run the React application
 CMD ["npm", "start"]

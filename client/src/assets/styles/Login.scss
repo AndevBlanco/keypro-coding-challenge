@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* .App{
+    height: 100%;
+    background-color: rgb(110,94,254);
+} */
+
+#login{
+    display: flex;
+    position: absolute;
+    width: 100%!important;
+    height: 100%!important;
+    background-color: rgb(110,94,254);
+}
+
+.main-container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 75%;
+    height: 500px;
+    background-color: white;
+    margin: auto;
+    justify-items: center;
+    border: 2px solid rgb(126, 112, 255)!important;
+    border-radius: 15px;
+    background-image: url('../images/map.jpg');
+    background-size: cover;
+    -webkit-box-shadow: -4px 9px 14px -4px rgba(0,0,0,0.51);
+    -moz-box-shadow: -4px 9px 14px -4px rgba(0,0,0,0.51);
+    box-shadow: -4px 9px 14px -4px rgba(0,0,0,0.51);
+}
+
+#section-logo{
+    width: 100%;
+    // background-color: black;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    display: flex;
+}
+
+#title-login{
+    background-color: rgb(126, 112, 255);
+    cursor: pointer;
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-decoration: none!important;
+    color: #fff;
+    margin: auto;
+    padding: 5%;
+    border-radius: 15px;
+    display: inline;
+}
+
+#section-form{
+    display: flex;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#form-login{
+    margin: auto;
+    font-size: 1.6vw;
+}
+
+.button-login{
+    font-size: 1.7vw!important;
+    border-radius: 50px;
+    padding: 15px;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-right: 5%;
+    // background-color: rgb(93, 75, 255);
+}
+
+#loginB{
+    background-color: rgb(93, 75, 255);
+    border-color: rgb(76, 56, 255);
+}
+
+/* #signinB{
+    background-color: rgb(13, 163, 71);
+    border-color:  rgb(2, 116, 45);
+} */
+
+#email-login, #password-login{
+    font-size: 1.8vw;
+    padding: 30px;
+    border-radius: 50px;
+    width: 100%;
+    margin-top: 5%;
+}
+
+@media screen and (min-width:1500px){
+    
+    #title-login{
+        font-size: 3.8vw!important;
+    }
+    #email-login, #password-login{
+        font-size: 2.25vw;
+        padding: 30px;
+        border-radius: 65px;
+    }
+    .button-login{
+        font-size: 2vw!important;
+        border-radius: 50px;
+        padding: 20px;
+        font-weight: bold;
+    }
+}
+
+@media screen and (min-width:1201px){
+    .main-container{
+        height: 70%;
+    }
+}
+
+@media screen and (max-width:1200px){
+    #login{
+        height: auto!important;
+    }
+    .main-container{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto;
+    }
+
+    #title-login{
+        font-size: 2.5rem!important;
+    }
+    
+
+    #section-form{
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 0px!important;
+    }
+
+    #email-login, #password-login{
+        font-size: 2rem;
+        padding: 25px;
+        border-radius: 65px;
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    #title-login{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width:700px){
+    #email-login, #password-login{
+        font-size: 1.6rem;
+        padding: 25px;
+        border-radius: 65px;
+    }
+    #title-login{
+        font-size: 2rem!important;
+    }
+}
+
+@media screen and (max-width:550px){
+    #title-login{
+        font-size: 1.5rem!important;
+    }
+    #email-login, #password-login{
+        font-size: 1rem;
+        padding: 20px;
+        border-radius: 65px;
+    }
+    .button-login{
+        font-size: 1rem!important;
+        border-radius: 50px;
+        padding: 10px;
+        font-weight: bold;
+    }
+}
