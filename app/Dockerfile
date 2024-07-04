@@ -1,5 +1,7 @@
 FROM python:3.9-slim
 
+RUN apt-get update && apt-get install -y netcat-traditional
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -14,4 +16,4 @@ ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Command to run the Flask application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["sh", "entrypoint.sh"]
