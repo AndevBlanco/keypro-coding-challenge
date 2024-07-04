@@ -1,4 +1,4 @@
 .env
 client/node_modules
 app/__pycache__
-app/migrations
+app/migrations/*
