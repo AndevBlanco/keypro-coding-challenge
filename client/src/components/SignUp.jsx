@@ -46,7 +46,7 @@ const SignUp = () => {
       if (response.ok) {
         console.log("User created successfully");
         alert("Registered successful!")
-        navigate("/login");
+        navigate("/");
       } else {
         console.error("Failed to create user");
         setError({
