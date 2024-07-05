@@ -26,7 +26,6 @@
     justify-items: center;
     border: 2px solid rgb(126, 112, 255)!important;
     border-radius: 15px;
-    background-image: url('../images/map.jpg');
     background-size: cover;
     -webkit-box-shadow: -4px 9px 14px -4px rgba(0,0,0,0.51);
     -moz-box-shadow: -4px 9px 14px -4px rgba(0,0,0,0.51);
@@ -35,10 +34,12 @@
 
 #section-logo{
     width: 100%;
-    // background-color: black;
+    background-image: url('../images/map.jpg');
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
     display: flex;
+    background-size: cover;
+    background-position: center;
 }
 
 #title-login{
@@ -58,7 +59,7 @@
 #section-form{
     display: flex;
     width: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: #fff;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }

@@ -12,7 +12,7 @@ const style = {
   p: 4,
 };
 
-const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
+const EditMarkerModal = ({ open, handleClose, marker, setMarker }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMarker({ ...marker, [name]: value });
@@ -20,21 +20,21 @@ const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/addMarker", {
-        method: "POST",
+      const response = await fetch(`http://localhost:5000/api/markers/${marker.id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({...marker, userId: localStorage.getItem('userId'), date: new Date()}),
+        body: JSON.stringify(marker),
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log("Marker saved:", data);
+      console.log("Marker updated:", data);
       handleClose();
     } catch (error) {
-      console.error("Error saving marker:", error);
+      console.error("Error updating marker:", error);
     }
   };
 
@@ -42,8 +42,16 @@ const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
     <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2">
-          Add Marker Information
+          Edit marker Information
         </Typography>
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Name"
+          name="name"
+          value={marker.name}
+          onChange={handleChange}
+        />
         <TextField
           fullWidth
           margin="normal"
@@ -60,4 +68,4 @@ const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
   );
 };
 
-export default AddMarkerModal;
+export default EditMarkerModal;

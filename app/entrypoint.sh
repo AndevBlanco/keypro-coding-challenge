@@ -6,8 +6,4 @@ while ! nc -z db 5432; do
 done
 echo "Database is ready!"
 
-flask db init
-flask db migrate
-flask db upgrade
-
 exec flask run --host=0.0.0.0

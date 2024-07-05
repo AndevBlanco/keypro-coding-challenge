@@ -1,13 +1,28 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Container, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Container,
+  Typography,
+  Modal,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/Login.scss";
 
 const Login = () => {
   const navigate = useNavigate();
+  if (localStorage.getItem('loggedIn')){
+    navigate("/map");
+  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+  });
+
+  const [error, setError] = useState({
+    show: false,
+    message: "",
   });
 
   const goToSignUp = () => {
@@ -18,23 +33,31 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      console.log(apiUrl);
+      const response = await fetch(`http://127.0.0.1:5000/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-
+      const data = await response.json();
       if (response.ok) {
         console.log("Login successful");
-        // Aquí podrías redirigir a otra página o manejar el estado de login
+        localStorage.setItem("userId", JSON.stringify(data.user_id));
+        localStorage.setItem("loggedIn", true);
+        navigate("/map");
       } else {
         console.error("Login failed");
-        // Manejo de errores, por ejemplo mostrar un mensaje al usuario
+        setError({
+          show: true,
+          message: data.message || "Login failed",
+        });
       }
     } catch (error) {
       console.error("Error:", error);
+      setError({ show: true, message: "Error occurred while login" });
     }
   };
 
@@ -43,14 +66,14 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleCloseErrorModal = () => {
+    setError({ show: false, message: "" });
+  };
+
   return (
     <main id="login">
       <section className="main-container">
-        <section id="section-logo">
-          <h1 id="title-login">
-            Map <i className="fas fa-question-circle"></i>
-          </h1>
-        </section>
+        <section id="section-logo"></section>
         <section id="section-form">
           <Container component="main" maxWidth="xs">
             <Box
@@ -106,7 +129,7 @@ const Login = () => {
                   type="button"
                   fullWidth
                   variant="outlined"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 1, mb: 2 }}
                   onClick={goToSignUp}
                 >
                   Sign Up
@@ -116,6 +139,45 @@ const Login = () => {
           </Container>
         </section>
       </section>
+      <Modal
+        open={error.show}
+        onClose={handleCloseErrorModal}
+        aria-labelledby="error-modal-title"
+        aria-describedby="error-modal-description"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            width: 250,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography
+            id="error-modal-title"
+            variant="h6"
+            component="h2"
+            gutterBottom
+          >
+            Error
+          </Typography>
+          <Typography
+            id="error-modal-description"
+            variant="body1"
+            component="p"
+          >
+            {error.message}
+          </Typography>
+        </Box>
+      </Modal>
     </main>
   );
 };
