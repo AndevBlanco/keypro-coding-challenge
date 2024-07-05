@@ -21,4 +21,6 @@ docker-compose up --build
 ```
 
 ### Run backend tests
+```sh
 python -m unittest ./app/test.py
+```
