@@ -32,7 +32,7 @@ cursor.execute("""
 """)
 
 cursor.execute("""
-    CREATE TABLE markers (
+    CREATE TABLE IF NOT EXISTS markers (
         id SERIAL PRIMARY KEY,
         description VARCHAR(200) NOT NULL,
         date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
