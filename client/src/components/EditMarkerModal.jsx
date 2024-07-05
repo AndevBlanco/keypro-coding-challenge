@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 
 const style = {
@@ -13,6 +13,16 @@ const style = {
 };
 
 const EditMarkerModal = ({ open, handleClose, marker, setMarker }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (marker.userId == localStorage.getItem("userId")) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [open]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMarker({ ...marker, [name]: value });
@@ -20,18 +30,43 @@ const EditMarkerModal = ({ open, handleClose, marker, setMarker }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/markers/${marker.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(marker),
-      });
+      const response = await fetch(
+        `http://localhost:5000/editMarker/${marker.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(marker),
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
       console.log("Marker updated:", data);
+      handleClose();
+    } catch (error) {
+      console.error("Error updating marker:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/deleteMarker/${marker.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log("Marker deleted:", data);
       handleClose();
     } catch (error) {
       console.error("Error updating marker:", error);
@@ -47,10 +82,11 @@ const EditMarkerModal = ({ open, handleClose, marker, setMarker }) => {
         <TextField
           fullWidth
           margin="normal"
-          label="Name"
+          label="User Name"
           name="name"
           value={marker.name}
           onChange={handleChange}
+          disabled
         />
         <TextField
           fullWidth
@@ -59,9 +95,22 @@ const EditMarkerModal = ({ open, handleClose, marker, setMarker }) => {
           name="description"
           value={marker.description}
           onChange={handleChange}
+          disabled={isDisabled}
         />
-        <Button onClick={handleSave} variant="contained" sx={{ mt: 2 }}>
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Date"
+          name="date"
+          value={marker.date}
+          onChange={handleChange}
+          disabled
+        />
+        <Button onClick={handleSave} variant="contained" sx={{ mt: 2 }} disabled={isDisabled}>
           Save
+        </Button>
+        <Button onClick={handleDelete} variant="contained" color="error" sx={{ mt: 2, ml: 2 }} disabled={isDisabled}>
+          Delete
         </Button>
       </Box>
     </Modal>

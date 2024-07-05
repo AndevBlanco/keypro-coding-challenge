@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  if (localStorage.getItem('loggedIn')){
+  if (localStorage.getItem("loggedIn")) {
     navigate("/map");
   }
   const [formData, setFormData] = useState({
@@ -45,6 +45,8 @@ const SignUp = () => {
 
       if (response.ok) {
         console.log("User created successfully");
+        alert("Registered successful!")
+        navigate("/login");
       } else {
         console.error("Failed to create user");
         setError({

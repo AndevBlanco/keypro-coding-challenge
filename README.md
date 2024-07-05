@@ -1,6 +1,6 @@
 # Docker Flask PostgreSQL Project
 
-This project includes a Flask application and a PostgreSQL database, both running in Docker containers.
+This project includes a Flask application, a PostgreSQL database and a React application, all of them running in Docker containers.
 
 ## Requirements
 
@@ -11,5 +11,14 @@ This project includes a Flask application and a PostgreSQL database, both runnin
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/your_username/docker-flask-postgres.git
-cd docker-flask-postgres
+git clone https://github.com/AndevBlanco/keypro-coding-challenge.git
+cd keypro-coding-challenge
+```
+
+### Run all
+```sh
+docker-compose up --build
+```
+
+### Run backend tests
+python -m unittest ./app/test.py

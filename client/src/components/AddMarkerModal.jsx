@@ -33,6 +33,7 @@ const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
       const data = await response.json();
       console.log("Marker saved:", data);
       handleClose();
+      marker.description = '';
     } catch (error) {
       console.error("Error saving marker:", error);
     }
@@ -49,7 +50,6 @@ const AddMarkerModal = ({ open, handleClose, marker, setMarker }) => {
           margin="normal"
           label="Description"
           name="description"
-          value={marker.description}
           onChange={handleChange}
         />
         <Button onClick={handleSave} variant="contained" sx={{ mt: 2 }}>

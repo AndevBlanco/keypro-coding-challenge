@@ -1,17 +1,17 @@
 version: "3.8"
 
 services:
-  # client:
-  #   build: ./client
-  #   ports:
-  #     - "3001:3001"
-  #   depends_on:
-  #     - web
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
-  #   volumes:
-  #     - ./client:/client
-  #     - /client/node_modules
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+    environment:
+      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
+    volumes:
+      - ./client:/client
+      - /client/node_modules
 
   web:
     build: ./app
